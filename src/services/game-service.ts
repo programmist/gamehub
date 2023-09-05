@@ -1,4 +1,4 @@
-import create from "./http-service";
+import create, { Entity } from "./http-service";
 
 export interface Platform {
   id: number;
@@ -6,8 +6,7 @@ export interface Platform {
   slug: string;
 }
 
-export interface Game {
-  id: number;
+export interface Game extends Entity {
   name: string;
   background_image: string;
   parent_platforms: Array<{ platform: Platform }>;
