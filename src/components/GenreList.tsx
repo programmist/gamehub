@@ -1,9 +1,9 @@
 import useData from "../hooks/useData";
-import useGenres from "../hooks/useGenres";
+import useGenres, { useMockGenres } from "../hooks/useGenres";
 import { Genre } from "../services/genre-service";
 
 function GenreList() {
-  const { data: genres, error, isLoading } = useGenres();
+  const { data: genres, error, isLoading } = useMockGenres();
   return (
     <ul>
       {genres.map(({ id, name }) => (
