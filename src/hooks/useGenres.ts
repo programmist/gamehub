@@ -1,6 +1,11 @@
-import { Genre } from "../services/genre-service";
 import useData from "./useData";
 import mockGenreData from "../services/mock-genres.json";
+import { Entity } from "../services/http-service";
+
+export interface Genre extends Entity {
+  name: string;
+  image_background: string;
+}
 
 const useGenres = () => useData<Genre>("/genres");
 

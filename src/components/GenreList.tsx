@@ -17,8 +17,8 @@ interface Props {
 }
 
 function GenreList({ onSelectGenre, selectedGenre }: Props) {
-  // const { data: genres, error, isLoading } = useMockGenres();
-  const { data: genres, error, isLoading } = useGenres();
+  const { data: genres, error, isLoading } = useMockGenres();
+  // const { data: genres, error, isLoading } = useGenres();
 
   if (isLoading) return <Spinner />;
 

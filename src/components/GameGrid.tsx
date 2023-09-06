@@ -3,15 +3,15 @@ import useGames, { useMockGames } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { Genre } from "../services/genre-service";
+import { Genre } from "../hooks/useGenres";
 
 interface Props {
   selectedGenre: Genre | null;
 }
 
 function GameGrid({ selectedGenre }: Props) {
-  // const { data: games, error, isLoading } = useMockGames();
-  const { data: games, error, isLoading } = useGames(selectedGenre);
+  const { data: games, error, isLoading } = useMockGames();
+  // const { data: games, error, isLoading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (

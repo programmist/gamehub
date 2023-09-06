@@ -1,7 +1,15 @@
-import { Game } from "../services/game-service";
 import useData from "./useData";
 import mockGameData from "../services/mock-games.json";
-import { Genre } from "../services/genre-service";
+import { Entity } from "../services/http-service";
+import { Platform } from "./usePlatform";
+import { Genre } from "./useGenres";
+
+export interface Game extends Entity {
+  name: string;
+  background_image: string;
+  parent_platforms: Array<{ platform: Platform }>;
+  metacritic: number;
+}
 
 const useGames = (selectedGenre: Genre | null) =>
   useData<Game>("/games", { params: { genres: selectedGenre?.id } }, [
