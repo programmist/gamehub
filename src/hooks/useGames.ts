@@ -13,6 +13,7 @@ export interface Game extends Entity {
 }
 
 export interface GameQuery {
+  search: string;
   genre: Genre | null;
   platform: Platform | null;
   order: SortOrder;
@@ -26,6 +27,7 @@ const useGames = (query: GameQuery) =>
         genres: query?.genre?.id,
         parent_platforms: query?.platform?.id,
         ordering: query.order.value,
+        search: query?.search,
       },
     },
     [query]

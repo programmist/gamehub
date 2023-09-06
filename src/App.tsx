@@ -13,6 +13,7 @@ import { SortOrder } from "./components/SortSelector";
 function App() {
   let [gameQuery, setGameQuery] = useState<GameQuery>({
     order: { value: "", label: "Relevance" },
+    search: "",
   } as GameQuery);
 
   const handleGenreSelection = (genre: Genre) => {
@@ -27,6 +28,12 @@ function App() {
     setGameQuery({ ...gameQuery, order });
   };
 
+  const handleSearchChange = (search: string) => {
+    if (search !== gameQuery.search) {
+      setGameQuery({ ...gameQuery, search });
+    }
+  };
+
   return (
     <Grid
       templateAreas={{
@@ -39,7 +46,7 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar onSearchSubmit={handleSearchChange} />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
