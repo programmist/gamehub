@@ -1,7 +1,7 @@
 import useData from "./useData";
 import mockGameData from "../services/mock-games.json";
 import { Entity } from "../services/http-service";
-import { Platform } from "./usePlatform";
+import { Platform } from "./usePlatforms";
 import { Genre } from "./useGenres";
 
 export interface Game extends Entity {
