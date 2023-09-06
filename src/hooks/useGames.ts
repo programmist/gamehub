@@ -3,6 +3,7 @@ import mockGameData from "../services/mock-games.json";
 import { Entity } from "../services/http-service";
 import { Platform } from "./usePlatforms";
 import { Genre } from "./useGenres";
+import { SortOrder } from "../components/SortSelector";
 
 export interface Game extends Entity {
   name: string;
@@ -14,6 +15,7 @@ export interface Game extends Entity {
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
+  order: SortOrder;
 }
 
 const useGames = (query: GameQuery) =>
@@ -23,6 +25,7 @@ const useGames = (query: GameQuery) =>
       params: {
         genres: query?.genre?.id,
         parent_platforms: query?.platform?.id,
+        ordering: query.order.value,
       },
     },
     [query]
