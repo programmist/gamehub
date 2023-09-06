@@ -11,19 +11,21 @@ export interface Game extends Entity {
   metacritic: number;
 }
 
-const useGames = (
-  selectedGenre: Genre | null,
-  selectedPlatform: Platform | null
-) =>
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+}
+
+const useGames = (query: GameQuery) =>
   useData<Game>(
     "/games",
     {
       params: {
-        genres: selectedGenre?.id,
-        parent_platforms: selectedPlatform?.id,
+        genres: query?.genre?.id,
+        parent_platforms: query?.platform?.id,
       },
     },
-    [selectedGenre?.id, selectedPlatform?.id]
+    [query]
   );
 
 const useMockGames = () => {
