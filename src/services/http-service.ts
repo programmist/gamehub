@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from "axios";
 import apiClient from "./api-client";
 
 export interface Entity {
@@ -16,11 +17,12 @@ class HttpService<T extends Entity> {
     this.endpoint = endpoint;
   }
 
-  getAll() {
+  getAll(requestConfig?: AxiosRequestConfig) {
     const controller = new AbortController();
     return {
       request: apiClient.get<FetchResponse<T>>(this.endpoint, {
         signal: controller.signal,
+        ...requestConfig,
       }),
       cancel: () => controller.abort(),
     };
