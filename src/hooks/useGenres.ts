@@ -1,21 +1,20 @@
 import useData from "./useData";
-import mockGenreData from "../services/mock-genres.json";
 import { Entity } from "../services/http-service";
+import staticGenres from "../data/genres";
 
 export interface Genre extends Entity {
   name: string;
   image_background: string;
 }
 
-const useGenres = () => useData<Genre>("/genres");
-
-const useMockGenres = () => {
-  return {
-    data: mockGenreData.results,
-    error: "",
-    isLoading: false,
-  };
+const useGenres = (useLiveData = true) => {
+  return useLiveData
+    ? useData<Genre>("/genres")
+    : {
+        data: staticGenres,
+        isLoading: false,
+        error: null,
+      };
 };
 
-export { useMockGenres };
 export default useGenres;

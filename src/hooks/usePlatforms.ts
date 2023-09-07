@@ -1,22 +1,20 @@
 import { Entity } from "../services/http-service";
 import useData from "./useData";
-import mockPlatforms from "../services/mock-platforms.json";
+import staticPlatforms from "../data/platforms";
 
 export interface Platform extends Entity {
   name: string;
   slug: string;
 }
 
-const usePlatforms = () => useData<Platform>("/platforms/lists/parents");
-
-const useMockPlatforms = () => {
-  return {
-    data: mockPlatforms.results,
-    error: "",
-    isLoading: false,
-  };
+const usePlatforms = (useLiveData = true) => {
+  return useLiveData
+    ? useData<Platform>("/platforms/lists/parents")
+    : {
+        data: staticPlatforms,
+        isLoading: false,
+        error: null,
+      };
 };
-
-export { useMockPlatforms };
 
 export default usePlatforms;

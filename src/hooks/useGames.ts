@@ -1,5 +1,5 @@
 import useData from "./useData";
-import mockGameData from "../services/mock-games.json";
+import staticGames from "../data/games";
 import { Entity } from "../services/http-service";
 import { Platform } from "./usePlatforms";
 import { Genre } from "./useGenres";
@@ -20,27 +20,25 @@ export interface GameQuery {
   order: SortOrder;
 }
 
-const useGames = (query: GameQuery) =>
-  useData<Game>(
-    "/games",
-    {
-      params: {
-        genres: query?.genre?.id,
-        parent_platforms: query?.platform?.id,
-        ordering: query.order.value,
-        search: query?.search,
-      },
-    },
-    [query]
-  );
-
-const useMockGames = () => {
-  return {
-    data: mockGameData.results,
-    error: "",
-    isLoading: false,
-  };
+const useGames = (query: GameQuery, useLiveData = true) => {
+  return useLiveData
+    ? useData<Game>(
+        "/games",
+        {
+          params: {
+            genres: query?.genre?.id,
+            parent_platforms: query?.platform?.id,
+            ordering: query.order.value,
+            search: query?.search,
+          },
+        },
+        [query]
+      )
+    : {
+        data: staticGames,
+        isLoading: false,
+        error: null,
+      };
 };
 
-export { useMockGames };
 export default useGames;
