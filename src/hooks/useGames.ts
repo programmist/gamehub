@@ -10,6 +10,7 @@ export interface Game extends Entity {
   background_image: string;
   parent_platforms: Array<{ platform: Platform }>;
   metacritic: number;
+  rating_top: number;
 }
 
 export interface GameQuery {
