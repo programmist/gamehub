@@ -10,6 +10,8 @@ import {
 import useGenres from "../hooks/useGenres";
 import getCroppedImgUrl from "../services/image-url";
 import { Genre } from "../services/genre-service";
+import { useContext } from "react";
+import SettingsContext from "../contexts/SettingsContext";
 
 interface Props {
   selectedGenre: Genre | null;
@@ -17,7 +19,8 @@ interface Props {
 }
 
 function GenreList({ onSelectGenre, selectedGenre }: Props) {
-  const { data: genres, error, isLoading } = useGenres(false);
+  const { useLiveData } = useContext(SettingsContext);
+  const { data: genres, error, isLoading } = useGenres(useLiveData);
 
   if (isLoading) return <Spinner />;
 
