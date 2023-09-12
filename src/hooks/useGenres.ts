@@ -1,15 +1,14 @@
-import useData from "./useData";
-import { Entity } from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
+import genreService, { Genre } from "../services/genre-service";
 import staticGenres from "../data/genres";
-
-export interface Genre extends Entity {
-  name: string;
-  image_background: string;
-}
 
 const useGenres = (useLiveData = true) => {
   return useLiveData
-    ? useData<Genre>("/genres")
+    ? useQuery<Genre[], Error>({
+        queryKey: ["genres"],
+        queryFn: genreService.getAll,
+        staleTime: 24 * 60 * 60 * 1000, // one day
+      })
     : {
         data: staticGenres,
         isLoading: false,

@@ -1,11 +1,6 @@
-import { Entity } from "../services/api-client";
 import useData from "./useData";
 import staticPlatforms from "../data/platforms";
-
-export interface Platform extends Entity {
-  name: string;
-  slug: string;
-}
+import { Platform } from "../services/platform-service";
 
 const usePlatforms = (useLiveData = true) => {
   return useLiveData

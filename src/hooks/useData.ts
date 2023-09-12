@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
-import { CanceledError } from "../services/api-client";
-import create, { Entity } from "../services/api-client";
-import { AxiosRequestConfig } from "axios";
+import { CanceledError, FetchResponse } from "../services/api-client";
+import { Entity } from "../services/api-client";
+import axios, { AxiosRequestConfig } from "axios";
+
+/**
+ * DELETE THIS HOOK ONCE REFACTOR COMPLETE
+ */
+const axiosInst = axios.create({
+  baseURL: "https://api.rawg.io/api",
+  params: {
+    key: import.meta.env.VITE_RAWG_API_KEY,
+  },
+});
 
 function useData<T extends Entity>(
   endpoint: string,
@@ -11,12 +21,22 @@ function useData<T extends Entity>(
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const service = create<T>(endpoint);
+
+  const getAll = (requestConfig?: AxiosRequestConfig) => {
+    const controller = new AbortController();
+    return {
+      request: axiosInst.get<FetchResponse<T>>(endpoint, {
+        signal: controller.signal,
+        ...requestConfig,
+      }),
+      cancel: () => controller.abort(),
+    };
+  };
 
   useEffect(
     () => {
       setLoading(true);
-      const { request, cancel } = service.getAll(requestConfig);
+      const { request, cancel } = getAll(requestConfig);
       request
         .then((res) => setData(res.data.results))
         .catch((err) => {

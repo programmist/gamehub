@@ -4,12 +4,12 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
-import { Genre } from "./hooks/useGenres";
-import { Platform } from "./hooks/usePlatforms";
-import { GameQuery } from "./hooks/useGames";
 import SortSelector from "./components/SortSelector";
 import { SortOrder } from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
+import { Genre } from "./services/genre-service";
+import { GameQuery } from "./services/game-service";
+import { Platform } from "./services/platform-service";
 
 function App() {
   let [gameQuery, setGameQuery] = useState<GameQuery>({
