@@ -1,10 +1,14 @@
-import useData from "./useData";
 import staticPlatforms from "../data/platforms";
-import { Platform } from "../services/platform-service";
+import platformService, { Platform } from "../services/platform-service";
+import { useQuery } from "@tanstack/react-query";
 
 const usePlatforms = (useLiveData = true) => {
   return useLiveData
-    ? useData<Platform>("/platforms/lists/parents")
+    ? useQuery<Platform[], Error>({
+        queryKey: ["platforms"],
+        queryFn: platformService.getAll,
+        staleTime: 24 * 60 * 60 * 1000, // one day
+      })
     : {
         data: staticPlatforms,
         isLoading: false,
