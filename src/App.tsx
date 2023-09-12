@@ -35,10 +35,6 @@ function App() {
     }
   };
 
-  const heading = `${gameQuery?.platform?.name ?? ""} ${
-    gameQuery?.genre?.name ?? ""
-  } Games`;
-
   return (
     <Grid
       templateAreas={{
