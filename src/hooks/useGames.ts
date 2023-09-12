@@ -1,6 +1,6 @@
 import useData from "./useData";
 import staticGames from "../data/games";
-import { Entity } from "../services/http-service";
+import { Entity } from "../services/api-client";
 import { Platform } from "./usePlatforms";
 import { Genre } from "./useGenres";
 import { SortOrder } from "../components/SortSelector";

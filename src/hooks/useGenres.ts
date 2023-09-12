@@ -1,5 +1,5 @@
 import useData from "./useData";
-import { Entity } from "../services/http-service";
+import { Entity } from "../services/api-client";
 import staticGenres from "../data/genres";
 
 export interface Genre extends Entity {

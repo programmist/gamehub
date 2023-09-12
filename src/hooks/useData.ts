@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
-import create, { Entity } from "../services/http-service";
+import create, { Entity } from "../services/api-client";
 import { AxiosRequestConfig } from "axios";
 
 function useData<T extends Entity>(

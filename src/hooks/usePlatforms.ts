@@ -1,4 +1,4 @@
-import { Entity } from "../services/http-service";
+import { Entity } from "../services/api-client";
 import useData from "./useData";
 import staticPlatforms from "../data/platforms";
 
