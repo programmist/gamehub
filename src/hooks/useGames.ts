@@ -1,8 +1,10 @@
 import staticGames from "../data/games";
+import { FetchResponse } from "../services/api-client";
 import gameService, { Game, GameQuery } from "../services/game-service";
 import { useQuery } from "@tanstack/react-query";
 
 const useGames = (query: GameQuery, useLiveData = true) => {
+  const staticData = { count: staticGames.length, results: staticGames };
   const params = {
     params: {
       genres: query?.genre?.id,
@@ -12,13 +14,13 @@ const useGames = (query: GameQuery, useLiveData = true) => {
     },
   };
   return useLiveData
-    ? useQuery<Game[], Error>({
+    ? useQuery<FetchResponse<Game>, Error>({
         queryKey: ["games", params],
         queryFn: () => gameService.getAll(params),
         staleTime: 5 * 60 * 1000, // 5 minutes
       })
     : {
-        data: staticGames,
+        data: staticData,
         isLoading: false,
         error: null,
       };

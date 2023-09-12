@@ -32,7 +32,7 @@ function GameGrid({ query }: Props) {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      {games?.map((game) => (
+      {games?.results.map((game) => (
         <GameCardContainer key={game.id}>
           <GameCard game={game} />
         </GameCardContainer>

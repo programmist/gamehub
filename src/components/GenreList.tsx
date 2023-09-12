@@ -20,8 +20,7 @@ interface Props {
 
 function GenreList({ onSelectGenre, selectedGenre }: Props) {
   const { useLiveData } = useContext(SettingsContext);
-  const { data: genres, error, isLoading } = useGenres(useLiveData);
-
+  const { data, error, isLoading } = useGenres(useLiveData);
   if (isLoading) return <Spinner />;
 
   return (
@@ -30,7 +29,7 @@ function GenreList({ onSelectGenre, selectedGenre }: Props) {
         Genres
       </Heading>
       <List>
-        {genres?.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image

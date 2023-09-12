@@ -37,7 +37,7 @@ class ApiClient<T extends Entity> {
       .get<FetchResponse<T>>(this.endpoint, {
         ...requestConfig,
       })
-      .then((res) => res.data.results);
+      .then((res) => res.data);
   };
 
   get = (id: number) => {
