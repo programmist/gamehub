@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, CanceledError } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 export interface Entity {
   id: number;
@@ -11,12 +11,12 @@ export interface FetchResponse<T extends Entity> {
   results: T[];
 }
 
-const getEntityName = <T extends Entity>(
+export function getEntity<T extends Entity>(
   entityList: T[],
   entityId?: number
-) => {
-  return entityList.find((entity) => entityId === entity.id)?.name;
-};
+) {
+  return entityList.find((entity) => entityId === entity.id);
+}
 
 const createAxiosInstance = () => {
   return axios.create({
@@ -30,7 +30,7 @@ const createAxiosInstance = () => {
 /**
  * APiClient simplifies and encapsulates accessing data from the various rawg.io API endpoints
  */
-class ApiClient<T extends Entity> {
+export class ApiClient<T extends Entity> {
   /**
    *
    * @param endpoint The endpoint of the Entity type of this client
@@ -50,8 +50,8 @@ class ApiClient<T extends Entity> {
   };
 
   get = (id: number) => {
-    return this.axiosInst.get<T>(`${this.endpoint}/${id}`);
+    return this.axiosInst
+      .get<T>(`${this.endpoint}/${id}`)
+      .then((res) => res.data);
   };
 }
-
-export { ApiClient, CanceledError, getEntityName };
