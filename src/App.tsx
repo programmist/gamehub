@@ -1,15 +1,12 @@
-import { Box, Grid, GridItem, HStack, Heading, Show } from "@chakra-ui/react";
-import NavBar from "./components/NavBar";
-import GameGrid from "./components/GameGrid";
-import GenreList from "./components/GenreList";
+import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
-import PlatformSelector from "./components/PlatformSelector";
-import SortSelector from "./components/SortSelector";
-import { SortOrder } from "./components/SortSelector";
+import GameGrid from "./components/GameGrid";
 import GameHeading from "./components/GameHeading";
-import { Genre } from "./services/genre-service";
+import GenreList from "./components/GenreList";
+import NavBar from "./components/NavBar";
+import PlatformSelector from "./components/PlatformSelector";
+import SortSelector, { SortOrder } from "./components/SortSelector";
 import { GameQuery } from "./services/game-service";
-import { Platform } from "./services/platform-service";
 
 function App() {
   let [gameQuery, setGameQuery] = useState<GameQuery>({
@@ -18,12 +15,12 @@ function App() {
     pageSize: 10,
   } as GameQuery);
 
-  const handleGenreSelection = (genre: Genre) => {
-    setGameQuery({ ...gameQuery, genre });
+  const handleGenreSelection = (genreId: number) => {
+    setGameQuery({ ...gameQuery, genreId });
   };
 
-  const handlePlatformSelection = (platform: Platform) => {
-    setGameQuery({ ...gameQuery, platform });
+  const handlePlatformSelection = (platformId: number) => {
+    setGameQuery({ ...gameQuery, platformId });
   };
 
   const handleSortSelection = (order: SortOrder) => {
@@ -53,8 +50,8 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
-            selectedGenre={gameQuery.genre}
-            onSelectGenre={handleGenreSelection}
+            selectedGenreId={gameQuery.genreId}
+            onSelectGenre={(genre) => handleGenreSelection(genre.id)}
           />
         </GridItem>
       </Show>
@@ -63,8 +60,10 @@ function App() {
           <GameHeading gameQuery={gameQuery} />
           <HStack spacing={5} marginBottom={5}>
             <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              onSelectPlatform={handlePlatformSelection}
+              selectedPlatformId={gameQuery.platformId}
+              onSelectPlatform={(platform) =>
+                handlePlatformSelection(platform.id)
+              }
             />
             <SortSelector
               onSortSelect={handleSortSelection}

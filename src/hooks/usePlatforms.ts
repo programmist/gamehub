@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const usePlatforms = (useLiveData = true) => {
   const staticData = {
     count: staticPlatforms.length,
+    next: null,
     results: staticPlatforms,
   };
   return useLiveData

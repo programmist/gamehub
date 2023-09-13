@@ -4,25 +4,31 @@ import usePlatforms from "../hooks/usePlatforms";
 import { Platform } from "../services/platform-service";
 import SettingsContext from "../contexts/SettingsContext";
 import { useContext } from "react";
+import { getEntityName } from "../services/api-client";
 
 interface Props {
-  selectedPlatform: Platform | null;
+  selectedPlatformId: number | null;
   onSelectPlatform: (platform: Platform) => void;
 }
 
-function PlatformSelector({ selectedPlatform, onSelectPlatform }: Props) {
+function PlatformSelector({ selectedPlatformId, onSelectPlatform }: Props) {
   const { useLiveData } = useContext(SettingsContext);
-  const { data: platforms, error } = usePlatforms(useLiveData);
+  const {
+    data: { results: platforms = [] },
+    error,
+  } = usePlatforms(useLiveData);
+
+  const platformName = getEntityName(platforms, selectedPlatformId);
 
   if (error) return null;
 
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-        {selectedPlatform?.name ?? "Platform"}
+        {platformName ?? "Platform"}
       </MenuButton>
       <MenuList>
-        {platforms?.results.map((platform) => (
+        {platforms.map((platform) => (
           <MenuItem
             onClick={() => onSelectPlatform(platform)}
             key={platform.id}

@@ -10,8 +10,8 @@ const useGames = (gameQuery: GameQuery) => {
         params: {
           page: pageParam,
           pageSize: gameQuery.pageSize,
-          genres: gameQuery?.genre?.id,
-          parent_platforms: gameQuery?.platform?.id,
+          genres: gameQuery?.genreId,
+          parent_platforms: gameQuery?.platformId,
           ordering: gameQuery.order.value,
           search: gameQuery?.search,
         },

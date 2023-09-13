@@ -1,7 +1,6 @@
 import { ApiClient, Entity } from "./api-client";
 
 export interface Genre extends Entity {
-  name: string;
   image_background: string;
 }
 

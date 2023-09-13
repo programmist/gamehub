@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, CanceledError } from "axios";
 
 export interface Entity {
   id: number;
+  name: string;
 }
 
 export interface FetchResponse<T extends Entity> {
@@ -9,6 +10,13 @@ export interface FetchResponse<T extends Entity> {
   next: string | null;
   results: T[];
 }
+
+const getEntityName = <T extends Entity>(
+  entityList: T[],
+  entityId: number | null
+) => {
+  return entityList.find((entity) => entityId === entity.id)?.name;
+};
 
 const createAxiosInstance = () => {
   return axios.create({
@@ -46,4 +54,4 @@ class ApiClient<T extends Entity> {
   };
 }
 
-export { ApiClient, CanceledError };
+export { ApiClient, CanceledError, getEntityName };

@@ -4,7 +4,6 @@ import { Genre } from "./genre-service";
 import { Platform } from "./platform-service";
 
 export interface Game extends Entity {
-  name: string;
   background_image: string;
   parent_platforms: Array<{ platform: Platform }>;
   metacritic: number;
@@ -13,8 +12,8 @@ export interface Game extends Entity {
 
 export interface GameQuery {
   search: string;
-  genre: Genre | null;
-  platform: Platform | null;
+  genreId: number | null;
+  platformId: number | null;
   order: SortOrder;
   pageSize: number;
 }

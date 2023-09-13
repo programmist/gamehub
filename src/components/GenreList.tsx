@@ -14,13 +14,17 @@ import { useContext } from "react";
 import SettingsContext from "../contexts/SettingsContext";
 
 interface Props {
-  selectedGenre: Genre | null;
+  selectedGenreId: number | null;
   onSelectGenre: (genre: Genre) => void;
 }
 
-function GenreList({ onSelectGenre, selectedGenre }: Props) {
+function GenreList({ onSelectGenre, selectedGenreId }: Props) {
   const { useLiveData } = useContext(SettingsContext);
-  const { data, error, isLoading } = useGenres(useLiveData);
+  const {
+    data: { results: genres = [] },
+    isLoading,
+  } = useGenres(useLiveData);
+
   if (isLoading) return <Spinner />;
 
   return (
@@ -29,7 +33,7 @@ function GenreList({ onSelectGenre, selectedGenre }: Props) {
         Genres
       </Heading>
       <List>
-        {data?.results.map((genre) => (
+        {genres.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
@@ -41,7 +45,7 @@ function GenreList({ onSelectGenre, selectedGenre }: Props) {
               <Button
                 whiteSpace="normal"
                 textAlign="left"
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
                 onClick={() => onSelectGenre(genre)}
                 fontSize="lg"
                 variant="link"

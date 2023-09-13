@@ -5,7 +5,11 @@ import { FetchResponse } from "../services/api-client";
 import genres from "../data/genres";
 
 const useGenres = (useLiveData = true) => {
-  const staticData = { count: genres.length, results: staticGenres };
+  const staticData = {
+    count: genres.length,
+    next: null,
+    results: staticGenres,
+  };
   return useLiveData
     ? useQuery<FetchResponse<Genre>, Error>({
         queryKey: ["genres"],
