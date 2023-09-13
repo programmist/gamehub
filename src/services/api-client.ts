@@ -13,7 +13,7 @@ export interface FetchResponse<T extends Entity> {
 
 const getEntityName = <T extends Entity>(
   entityList: T[],
-  entityId: number | null
+  entityId?: number
 ) => {
   return entityList.find((entity) => entityId === entity.id)?.name;
 };

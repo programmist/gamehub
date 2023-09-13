@@ -8,22 +8,19 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
-import getCroppedImgUrl from "../services/image-url";
 import { Genre } from "../services/genre-service";
-import { useContext } from "react";
-import SettingsContext from "../contexts/SettingsContext";
+import getCroppedImgUrl from "../services/image-url";
 
 interface Props {
-  selectedGenreId: number | null;
+  selectedGenreId?: number;
   onSelectGenre: (genre: Genre) => void;
 }
 
 function GenreList({ onSelectGenre, selectedGenreId }: Props) {
-  const { useLiveData } = useContext(SettingsContext);
   const {
     data: { results: genres = [] },
     isLoading,
-  } = useGenres(useLiveData);
+  } = useGenres();
 
   if (isLoading) return <Spinner />;
 

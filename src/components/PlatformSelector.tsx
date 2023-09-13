@@ -1,22 +1,19 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatforms";
-import { Platform } from "../services/platform-service";
-import SettingsContext from "../contexts/SettingsContext";
-import { useContext } from "react";
 import { getEntityName } from "../services/api-client";
+import { Platform } from "../services/platform-service";
 
 interface Props {
-  selectedPlatformId: number | null;
+  selectedPlatformId?: number;
   onSelectPlatform: (platform: Platform) => void;
 }
 
 function PlatformSelector({ selectedPlatformId, onSelectPlatform }: Props) {
-  const { useLiveData } = useContext(SettingsContext);
   const {
     data: { results: platforms = [] },
     error,
-  } = usePlatforms(useLiveData);
+  } = usePlatforms();
 
   const platformName = getEntityName(platforms, selectedPlatformId);
 

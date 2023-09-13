@@ -11,11 +11,11 @@ interface Props {
 function GameHeading({ gameQuery: { platformId, genreId } }: Props) {
   const {
     data: { results: platforms = [] },
-  } = usePlatforms(true);
+  } = usePlatforms();
 
   const {
     data: { results: genres = [] },
-  } = useGenres(true);
+  } = useGenres();
 
   const platformName = getEntityName(platforms, platformId);
   const genreName = getEntityName(genres, genreId);

@@ -12,8 +12,8 @@ export interface Game extends Entity {
 
 export interface GameQuery {
   search: string;
-  genreId: number | null;
-  platformId: number | null;
+  genreId?: number;
+  platformId?: number;
   order: SortOrder;
   pageSize: number;
 }
