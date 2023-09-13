@@ -15,6 +15,7 @@ function App() {
   let [gameQuery, setGameQuery] = useState<GameQuery>({
     order: { value: "", label: "Relevance" },
     search: "",
+    pageSize: 10,
   } as GameQuery);
 
   const handleGenreSelection = (genre: Genre) => {

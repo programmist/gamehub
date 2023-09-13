@@ -6,6 +6,7 @@ export interface Entity {
 
 export interface FetchResponse<T extends Entity> {
   count: number;
+  next: string | null;
   results: T[];
 }
 

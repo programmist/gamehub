@@ -16,6 +16,7 @@ export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   order: SortOrder;
+  pageSize: number;
 }
 
 export default new ApiClient<Game>("/games");
