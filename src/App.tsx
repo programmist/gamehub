@@ -1,37 +1,19 @@
 import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
-import { useState } from "react";
+import { useReducer } from "react";
 import GameGrid from "./components/GameGrid";
 import GameHeading from "./components/GameHeading";
 import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
-import SortSelector, { SortOrder } from "./components/SortSelector";
-import { GameQuery } from "./services/game-service";
+import SortSelector from "./components/SortSelector";
+import gameQueryReducer from "./reducers/gameQueryReducer";
 
 function App() {
-  let [gameQuery, setGameQuery] = useState<GameQuery>({
+  let [gameQuery, dispatch] = useReducer(gameQueryReducer, {
     order: { value: "", label: "Relevance" },
     search: "",
     pageSize: 10,
-  } as GameQuery);
-
-  const handleGenreSelection = (genreId: number) => {
-    setGameQuery({ ...gameQuery, genreId });
-  };
-
-  const handlePlatformSelection = (platformId: number) => {
-    setGameQuery({ ...gameQuery, platformId });
-  };
-
-  const handleSortSelection = (order: SortOrder) => {
-    setGameQuery({ ...gameQuery, order });
-  };
-
-  const handleSearchChange = (search: string) => {
-    if (search !== gameQuery.search) {
-      setGameQuery({ ...gameQuery, search });
-    }
-  };
+  });
 
   return (
     <Grid
@@ -45,13 +27,19 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar onSearchSubmit={handleSearchChange} />
+        <NavBar
+          onSearchSubmit={(search) => {
+            dispatch({ type: "SEARCH_UPDATE", search });
+          }}
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
             selectedGenreId={gameQuery.genreId}
-            onSelectGenre={(genre) => handleGenreSelection(genre.id)}
+            onSelectGenre={({ id: genreId }) =>
+              dispatch({ type: "GENRE_UPDATE", genreId })
+            }
           />
         </GridItem>
       </Show>
@@ -61,12 +49,12 @@ function App() {
           <HStack spacing={5} marginBottom={5}>
             <PlatformSelector
               selectedPlatformId={gameQuery.platformId}
-              onSelectPlatform={(platform) =>
-                handlePlatformSelection(platform.id)
+              onSelectPlatform={({ id: platformId }) =>
+                dispatch({ type: "PLATFORM_UPDATE", platformId })
               }
             />
             <SortSelector
-              onSortSelect={handleSortSelection}
+              onSortSelect={(order) => dispatch({ type: "SORT_UPDATE", order })}
               selectedOrder={gameQuery.order}
             />
           </HStack>
