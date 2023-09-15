@@ -33,7 +33,7 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
-            selectedGenreId={gameQuery.genreId}
+            selectedGenreId={gameQuery?.genreId}
             onSelectGenre={({ id: genreId }) => updateGenre(genreId)}
           />
         </GridItem>
@@ -46,14 +46,14 @@ function App() {
           />
           <HStack spacing={5} marginBottom={5}>
             <PlatformSelector
-              selectedPlatformId={gameQuery.platformId}
+              selectedPlatformId={gameQuery?.platformId}
               onSelectPlatform={({ id: platformId }) =>
                 updatePlatform(platformId)
               }
             />
             <SortSelector
               onSortSelect={(order) => updateSort(order)}
-              selectedOrder={gameQuery.order}
+              selectedOrder={gameQuery?.order}
             />
           </HStack>
         </Box>
