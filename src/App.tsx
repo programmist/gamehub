@@ -1,19 +1,15 @@
 import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
-import { useReducer } from "react";
 import GameGrid from "./components/GameGrid";
 import GameHeading from "./components/GameHeading";
 import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
-import gameQueryReducer from "./reducers/gameQueryReducer";
+import useGameQueryStore from "./stores/gameQueryStore";
 
 function App() {
-  let [gameQuery, dispatch] = useReducer(gameQueryReducer, {
-    order: { value: "", label: "Relevance" },
-    search: "",
-    pageSize: 10,
-  });
+  const { gameQuery, updateGenre, updatePlatform, updateSearch, updateSort } =
+    useGameQueryStore();
 
   return (
     <Grid
@@ -29,7 +25,9 @@ function App() {
       <GridItem area="nav">
         <NavBar
           onSearchSubmit={(search) => {
-            dispatch({ type: "SEARCH_UPDATE", search });
+            if (gameQuery.search !== search) {
+              updateSearch(search);
+            }
           }}
         />
       </GridItem>
@@ -37,9 +35,7 @@ function App() {
         <GridItem area="aside" paddingX={5}>
           <GenreList
             selectedGenreId={gameQuery.genreId}
-            onSelectGenre={({ id: genreId }) =>
-              dispatch({ type: "GENRE_UPDATE", genreId })
-            }
+            onSelectGenre={({ id: genreId }) => updateGenre(genreId)}
           />
         </GridItem>
       </Show>
@@ -50,11 +46,11 @@ function App() {
             <PlatformSelector
               selectedPlatformId={gameQuery.platformId}
               onSelectPlatform={({ id: platformId }) =>
-                dispatch({ type: "PLATFORM_UPDATE", platformId })
+                updatePlatform(platformId)
               }
             />
             <SortSelector
-              onSortSelect={(order) => dispatch({ type: "SORT_UPDATE", order })}
+              onSortSelect={(order) => updateSort(order)}
               selectedOrder={gameQuery.order}
             />
           </HStack>

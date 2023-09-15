@@ -23,6 +23,7 @@ function SearchInput({ onSearchSubmit }: Props) {
           <BsSearch />
         </InputLeftElement>
         <Input
+          id="search-input"
           ref={inputRef}
           placeholder="Search games..."
           borderRadius={20}
