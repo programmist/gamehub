@@ -17,8 +17,8 @@ function SortSelector() {
     { value: "rating", label: "Average Rating" },
   ];
 
-  const selectedOrder = useGameQueryStore((store) => store.gameQuery.order);
-  const onSortSelect = useGameQueryStore((store) => store.updateSort);
+  const selectedOrder = useGameQueryStore((s) => s.gameQuery.order);
+  const setSort = useGameQueryStore((s) => s.setSort);
 
   return (
     <Menu>
@@ -28,7 +28,7 @@ function SortSelector() {
       <MenuList>
         {sortOrders.map((order) => (
           <MenuItem
-            onClick={() => onSortSelect(order)}
+            onClick={() => setSort(order)}
             key={order.value}
             value={order.value}
           >

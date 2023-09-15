@@ -5,17 +5,16 @@ import useGameQueryStore from "../stores/gameQueryStore";
 
 function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { search, onSearchSubmit } = useGameQueryStore((state) => ({
-    search: state.gameQuery.searchText,
-    onSearchSubmit: state.updateSearch,
-  }));
+  const searchText = useGameQueryStore((s) => s.gameQuery.searchText);
+  const setSearch = useGameQueryStore((s) => s.setSearch);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (inputRef.current && search !== inputRef.current.value) {
-          onSearchSubmit(inputRef.current.value);
+        const input = inputRef.current;
+        if (input && searchText !== input.value) {
+          setSearch(inputRef.current.value);
         }
       }}
     >

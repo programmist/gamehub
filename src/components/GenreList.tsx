@@ -16,8 +16,8 @@ function GenreList() {
     data: { results: genres = [] },
     isLoading,
   } = useGenres();
-  const selectedGenreId = useGameQueryStore((store) => store.gameQuery.genreId);
-  const onSelectGenre = useGameQueryStore((store) => store.updateGenre);
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setGenreId = useGameQueryStore((s) => s.setGenreId);
 
   if (isLoading) return <Spinner />;
 
@@ -40,7 +40,7 @@ function GenreList() {
                 whiteSpace="normal"
                 textAlign="left"
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
-                onClick={() => onSelectGenre(genre.id)}
+                onClick={() => setGenreId(genre.id)}
                 fontSize="lg"
                 variant="link"
               >

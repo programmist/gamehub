@@ -9,10 +9,10 @@ function PlatformSelector() {
     data: { results: platforms = [] },
     error,
   } = usePlatforms();
-  const platformId = useGameQueryStore((store) => store.gameQuery.platformId);
-  const onSelectPlatform = useGameQueryStore((store) => store.updatePlatform);
+  const selectedPlatformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
 
-  const platform = usePlatform(platformId);
+  const platform = usePlatform(selectedPlatformId);
 
   if (error) return null;
 
@@ -24,7 +24,7 @@ function PlatformSelector() {
       <MenuList>
         {platforms.map((platform) => (
           <MenuItem
-            onClick={() => onSelectPlatform(platform.id)}
+            onClick={() => setPlatformId(platform.id)}
             key={platform.id}
           >
             {platform.name}

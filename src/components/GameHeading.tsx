@@ -9,10 +9,10 @@ interface Props {
 }
 
 function GameHeading() {
-  const genreId = useGameQueryStore((store) => store.gameQuery.genreId);
+  const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
   const selectedGenre = useGenre(genreId);
 
-  const platformId = useGameQueryStore((store) => store.gameQuery.platformId);
+  const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
   const selectedPlatform = usePlatform(platformId);
 
   return (
