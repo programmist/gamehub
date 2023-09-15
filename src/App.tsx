@@ -57,7 +57,7 @@ function App() {
             />
           </HStack>
         </Box>
-        <GameGrid query={gameQuery} />
+        <GameGrid />
       </GridItem>
     </Grid>
   );
