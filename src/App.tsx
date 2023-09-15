@@ -23,13 +23,7 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar
-          onSearchSubmit={(search) => {
-            if (gameQuery.search !== search) {
-              updateSearch(search);
-            }
-          }}
-        />
+        <NavBar />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
