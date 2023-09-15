@@ -6,7 +6,7 @@ import useGameQueryStore from "../stores/gameQueryStore";
 function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { search, onSearchSubmit } = useGameQueryStore((state) => ({
-    search: state.gameQuery.search,
+    search: state.gameQuery.searchText,
     onSearchSubmit: state.updateSearch,
   }));
 

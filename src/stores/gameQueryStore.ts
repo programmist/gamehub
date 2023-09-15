@@ -2,11 +2,11 @@ import { SortOrder } from "../components/SortSelector";
 import { create } from "zustand";
 
 interface GameQuery {
-  search: string;
+  searchText?: string;
   genreId?: number;
   platformId?: number;
-  order: SortOrder;
-  pageSize: number;
+  order?: SortOrder;
+  pageSize?: number;
 }
 
 interface GameQueryStore {
@@ -18,18 +18,13 @@ interface GameQueryStore {
 }
 
 const useGameQueryStore = create<GameQueryStore>((set) => ({
-  gameQuery: {
-    order: { value: "", label: "Relevance" },
-    search: "",
-    pageSize: 10,
-  },
-  updateGenre: (genreId: number) =>
+  gameQuery: {},
+  updateSearch: (searchText) => set(() => ({ gameQuery: { searchText } })),
+  updateGenre: (genreId) =>
     set((store) => ({ gameQuery: { ...store.gameQuery, genreId } })),
-  updatePlatform: (platformId: number) =>
+  updatePlatform: (platformId) =>
     set((store) => ({ gameQuery: { ...store.gameQuery, platformId } })),
-  updateSearch: (search: string) =>
-    set((store) => ({ gameQuery: { ...store.gameQuery, search } })),
-  updateSort: (order: SortOrder) =>
+  updateSort: (order) =>
     set((store) => ({ gameQuery: { ...store.gameQuery, order } })),
 }));
 
