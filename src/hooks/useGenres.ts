@@ -1,8 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import genreService, { Genre } from "../services/genre-service";
-import { FetchResponse } from "../services/api-client";
+import { ApiClient, Entity, FetchResponse } from "../services/api-client";
 import staticGenres from "../data/genres";
 import ms from "ms";
+
+export interface Genre extends Entity {
+  image_background: string;
+}
+
+const genreService = new ApiClient<Genre>("/genres");
 
 const useGenres = () => {
   return useQuery<FetchResponse<Genre>, Error>({

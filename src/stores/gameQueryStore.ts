@@ -1,6 +1,13 @@
 import { SortOrder } from "../components/SortSelector";
-import { GameQuery } from "../services/game-service";
 import { create } from "zustand";
+
+interface GameQuery {
+  search: string;
+  genreId?: number;
+  platformId?: number;
+  order: SortOrder;
+  pageSize: number;
+}
 
 interface GameQueryStore {
   gameQuery: GameQuery;

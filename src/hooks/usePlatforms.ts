@@ -1,8 +1,13 @@
 import staticPlatforms from "../data/platforms";
-import { FetchResponse } from "../services/api-client";
-import platformService, { Platform } from "../services/platform-service";
+import { ApiClient, Entity, FetchResponse } from "../services/api-client";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
+
+export interface Platform extends Entity {
+  slug: string;
+}
+
+const platformService = new ApiClient<Platform>("/platforms/lists/parents");
 
 const usePlatforms = () => {
   return useQuery<FetchResponse<Platform>, Error>({
