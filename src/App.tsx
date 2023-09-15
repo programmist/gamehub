@@ -5,17 +5,8 @@ import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
-import useGameQueryStore from "./stores/gameQueryStore";
-import usePlatform from "./hooks/usePlatform";
-import useGenre from "./hooks/useGenre";
 
 function App() {
-  const { gameQuery, updateGenre, updatePlatform, updateSort } =
-    useGameQueryStore();
-
-  const selectedPlatform = usePlatform(gameQuery.platformId);
-  const selectedGenre = useGenre(gameQuery.genreId);
-
   return (
     <Grid
       templateAreas={{
@@ -32,29 +23,15 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <GenreList
-            selectedGenreId={gameQuery?.genreId}
-            onSelectGenre={({ id: genreId }) => updateGenre(genreId)}
-          />
+          <GenreList />
         </GridItem>
       </Show>
       <GridItem area="main">
         <Box paddingLeft={2}>
-          <GameHeading
-            platformName={selectedPlatform?.name}
-            genreName={selectedGenre?.name}
-          />
+          <GameHeading />
           <HStack spacing={5} marginBottom={5}>
-            <PlatformSelector
-              selectedPlatformId={gameQuery?.platformId}
-              onSelectPlatform={({ id: platformId }) =>
-                updatePlatform(platformId)
-              }
-            />
-            <SortSelector
-              onSortSelect={(order) => updateSort(order)}
-              selectedOrder={gameQuery?.order}
-            />
+            <PlatformSelector />
+            <SortSelector />
           </HStack>
         </Box>
         <GameGrid />
