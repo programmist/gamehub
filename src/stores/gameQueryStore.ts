@@ -1,4 +1,4 @@
-import { SortOrder } from "../components/SortSelector";
+import { SortOrder } from "../components/filters/SortSelector";
 import { create } from "zustand";
 
 interface GameQuery {

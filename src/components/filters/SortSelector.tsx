@@ -7,7 +7,7 @@ import {
   MenuOptionGroup,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import useGameQueryStore from "../stores/gameQueryStore";
+import useGameQueryStore from "../../stores/gameQueryStore";
 
 export interface SortOrder {
   value: string;
