@@ -6,6 +6,7 @@ import GameGrid from "../components/games/GameGrid";
 import GameHeading from "../components/games/GameHeading";
 
 export const HomePage = () => {
+  throw new Error("Test error");
   return (
     <Grid
       templateAreas={{
