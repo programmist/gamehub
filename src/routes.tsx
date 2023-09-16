@@ -1,19 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./Layout";
-import ErrorPage from "./ErrorPage";
-import App from "./App";
-import GameDetail from "./components/game-detail/GameDetail";
-import HomeRedirect from "./components/HomeRedirect";
+import ErrorPage from "./pages/ErrorPage";
+import GameDetail from "./pages/GameDetailPage";
+import { HomePage } from "./pages/HomePage";
+import Layout from "./pages/Layout";
 
 const router = createBrowserRouter([
-  { path: "/", element: <HomeRedirect /> },
   {
-    path: "/games",
+    path: "/",
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <App /> },
-      { path: ":id", element: <GameDetail /> },
+      { index: true, element: <HomePage /> },
+      { path: "games/:id", element: <GameDetail /> },
     ],
   },
 ]);
