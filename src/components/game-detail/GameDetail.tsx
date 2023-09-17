@@ -3,6 +3,7 @@ import { Game } from "../../entities/Game";
 import Summarize from "../Summarize";
 import GameAttributes from "./GameAttributes";
 import GameTrailer from "./GameTrailer";
+import GameScreenshotGrid from "./GameScreenshotGrid";
 
 interface Props {
   game: Game;
@@ -19,6 +20,7 @@ const GameDetail = ({ game }: Props) => {
           <GameTrailer gameSlug={game.slug} />
         </Center>
       </Box>
+      <GameScreenshotGrid gameId={game.id} />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import GameDetail from "../components/games/GameDetail";
+import GameDetail from "../components/game-detail/GameDetail";
 import useGame from "../hooks/useGame";
 
 const GameDetailPage = () => {
