@@ -49,9 +49,9 @@ export class ApiClient<T extends Entity> {
       .then((res) => res.data);
   };
 
-  get = (id: string) => {
+  get = (slug: string) => {
     return this.axiosInst
-      .get<T>(`${this.endpoint}/${id}`)
+      .get<T>(`${this.endpoint}/${slug}`)
       .then((res) => res.data);
   };
 }

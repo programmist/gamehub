@@ -5,7 +5,9 @@ import useGameQueryStore from "../stores/gameQueryStore";
 import { Platform } from "./usePlatforms";
 
 export interface Game extends Entity {
+  slug: string;
   description: string;
+  description_raw: string;
   background_image: string;
   parent_platforms: Array<{ platform: Platform }>;
   metacritic: number;

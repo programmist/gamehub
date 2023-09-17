@@ -4,8 +4,8 @@ import useGame from "../hooks/useGame";
 import sanitizeHtml from "sanitize-html";
 
 const GameDetailPage = () => {
-  const { id = "" } = useParams();
-  const { data: game } = useGame(id);
+  const { slug = "" } = useParams();
+  const { data: game } = useGame(slug);
   return (
     <Box padding={5}>
       <Heading>{game?.name}</Heading>

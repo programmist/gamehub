@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Game, gameService } from "./useGames";
 import ms from "ms";
 
-const useGame = (id: string) => {
+const useGame = (slug: string) => {
   return useQuery<Game, Error>({
-    queryKey: ["game", id],
-    queryFn: () => gameService.get(id),
+    queryKey: ["game", slug],
+    queryFn: () => gameService.get(slug),
     staleTime: ms("1 day"),
     // initialData: staticGenres,
   });
