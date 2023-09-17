@@ -1,15 +1,23 @@
-import { Trailer } from "../../entities/Trailer";
+import useTrailers from "../../hooks/useTrailers";
 
 interface Props {
-  trailer: Trailer;
+  gameSlug: string;
 }
 
-const GameTrailer = ({ trailer }: Props) => {
-  return (
-    <video poster={trailer.preview} preload="auto" controls>
-      <source src={trailer.data["480"]} type="video/mp4" />
+const GameTrailer = ({ gameSlug }: Props) => {
+  const { data, error, isLoading } = useTrailers(gameSlug);
+
+  if (isLoading) return null;
+
+  if (error) throw error;
+
+  const firstTrailer = data?.results[0];
+
+  return firstTrailer ? (
+    <video poster={firstTrailer.preview} preload="auto" controls>
+      <source src={firstTrailer.data["480"]} />
     </video>
-  );
+  ) : null;
 };
 
 export default GameTrailer;
