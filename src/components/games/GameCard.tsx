@@ -4,7 +4,7 @@ import PlatformIconList from "./PlatformIconList";
 import getCroppedImgUrl from "../../services/image-url";
 
 import { Link } from "react-router-dom";
-import { Game } from "../../hooks/useGames";
+import { Game } from "../../services/game-service";
 import CriticScore from "./CriticScore";
 import Emoji from "./Emoji";
 
