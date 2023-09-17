@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { Entity } from "../entities/Entity";
+import Entity from "../entities/Entity";
 
 export interface FetchResponse<T extends Entity> {
   count: number;

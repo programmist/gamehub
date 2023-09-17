@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import { ApiClient, FetchResponse } from "../services/api-client";
-import { Screenshot } from "../entities/Screenshot";
+import Screenshot from "../entities/Screenshot";
 
 const useScreenshots = (gameId: number) => {
   // FIXME: Is instantiation within this function inefficient?

@@ -1,5 +1,5 @@
-import { Entity } from "./Entity";
+import Entity from "./Entity";
 
-export interface Genre extends Entity {
+export default interface Genre extends Entity {
   image_background: string;
 }

@@ -1,5 +1,5 @@
-import { Entity } from "./Entity";
+import Entity from "./Entity";
 
-export interface Platform extends Entity {
+export default interface Platform extends Entity {
   slug: string;
 }

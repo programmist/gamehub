@@ -1,6 +1,6 @@
-import { Entity } from "./Entity";
+import Entity from "./Entity";
 
-export interface Screenshot extends Entity {
+export default interface Screenshot extends Entity {
   image: string;
   hidden: boolean;
   width: number;

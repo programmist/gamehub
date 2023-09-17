@@ -1,5 +1,5 @@
 import React from "react";
-import { Entity } from "./Entity";
+import Entity from "./Entity";
 
 export default interface Publisher extends Entity {
   slug: string;

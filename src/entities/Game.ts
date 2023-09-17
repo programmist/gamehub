@@ -1,9 +1,9 @@
-import { Platform } from "./Platform";
-import { Entity } from "./Entity";
-import { Genre } from "./Genre";
+import Platform from "./Platform";
+import Entity from "./Entity";
+import Genre from "./Genre";
 import Publisher from "./Publisher";
 
-export interface Game extends Entity {
+export default interface Game extends Entity {
   slug: string;
   description: string;
   description_raw: string;
