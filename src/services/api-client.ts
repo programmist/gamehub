@@ -49,7 +49,7 @@ export class ApiClient<T extends Entity> {
       .then((res) => res.data);
   };
 
-  get = (id: number) => {
+  get = (id: string) => {
     return this.axiosInst
       .get<T>(`${this.endpoint}/${id}`)
       .then((res) => res.data);

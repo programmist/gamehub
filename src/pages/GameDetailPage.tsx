@@ -1,14 +1,21 @@
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
+import useGame from "../hooks/useGame";
+import sanitizeHtml from "sanitize-html";
 
-const GameDetail = () => {
-  const { id } = useParams();
+const GameDetailPage = () => {
+  const { id = "" } = useParams();
+  const { data: game } = useGame(id);
   return (
-    <>
-      {/* TODO: Insert <GameDetails /> */}
-      <div>Game Detail Page</div>
-      <div>Game ID: {id}</div>
-    </>
+    <Box padding={5}>
+      <Heading>{game?.name}</Heading>
+      <Text
+        dangerouslySetInnerHTML={{
+          __html: sanitizeHtml(game?.description as string),
+        }}
+      />
+    </Box>
   );
 };
 
-export default GameDetail;
+export default GameDetailPage;
