@@ -1,5 +1,5 @@
-import { Platform } from "../hooks/usePlatforms";
-import { ApiClient, Entity } from "./api-client";
+import { Platform } from "./Platform";
+import { Entity } from "./Entity";
 
 export interface Game extends Entity {
   slug: string;
@@ -10,7 +10,3 @@ export interface Game extends Entity {
   metacritic: number;
   rating_top: number;
 }
-
-const gameService = new ApiClient<Game>("/games");
-
-export default gameService;

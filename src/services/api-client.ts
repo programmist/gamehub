@@ -1,9 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-
-export interface Entity {
-  id: number;
-  name: string;
-}
+import { Entity } from "../entities/Entity";
 
 export interface FetchResponse<T extends Entity> {
   count: number;
@@ -18,14 +14,12 @@ export function getEntity<T extends Entity>(
   return entityList.find((entity) => entityId === entity.id);
 }
 
-const createAxiosInstance = () => {
-  return axios.create({
-    baseURL: "https://api.rawg.io/api",
-    params: {
-      key: import.meta.env.VITE_RAWG_API_KEY,
-    },
-  });
-};
+const axiosInstance = axios.create({
+  baseURL: "https://api.rawg.io/api",
+  params: {
+    key: import.meta.env.VITE_RAWG_API_KEY,
+  },
+});
 
 /**
  * APiClient simplifies and encapsulates accessing data from the various rawg.io API endpoints
@@ -38,7 +32,7 @@ export class ApiClient<T extends Entity> {
    */
   constructor(
     private endpoint: string,
-    private axiosInst: AxiosInstance = createAxiosInstance()
+    private axiosInst: AxiosInstance = axiosInstance
   ) {}
 
   getAll = (requestConfig?: AxiosRequestConfig) => {

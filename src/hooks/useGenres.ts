@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { ApiClient, Entity, FetchResponse } from "../services/api-client";
+import { ApiClient, FetchResponse } from "../services/api-client";
 import staticGenres from "../data/genres";
 import ms from "ms";
-
-export interface Genre extends Entity {
-  image_background: string;
-}
+import { Genre } from "../entities/Genre";
 
 const genreService = new ApiClient<Genre>("/genres");
 
