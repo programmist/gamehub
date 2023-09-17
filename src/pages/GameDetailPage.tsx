@@ -1,7 +1,6 @@
 import { Box, Heading, Spinner, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import useGame from "../hooks/useGame";
-import sanitizeHtml from "sanitize-html";
 
 const GameDetailPage = () => {
   const { slug } = useParams();
@@ -16,7 +15,7 @@ const GameDetailPage = () => {
       <Heading>{game.name}</Heading>
       <Text
         dangerouslySetInnerHTML={{
-          __html: sanitizeHtml(game.description as string),
+          __html: game.description_raw as string,
         }}
       />
     </Box>
