@@ -1,6 +1,7 @@
 import { Box, Heading, Spinner, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import useGame from "../hooks/useGame";
+import Summarize from "../components/Summarize";
 
 const GameDetailPage = () => {
   const { slug } = useParams();
@@ -13,11 +14,9 @@ const GameDetailPage = () => {
   return (
     <Box padding={5}>
       <Heading>{game.name}</Heading>
-      <Text
-        dangerouslySetInnerHTML={{
-          __html: game.description_raw as string,
-        }}
-      />
+      <Text>
+        <Summarize>{game.description_raw}</Summarize>
+      </Text>
     </Box>
   );
 };
